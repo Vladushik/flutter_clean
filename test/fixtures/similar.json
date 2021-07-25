@@ -1,0 +1,92 @@
+{
+  "Similar": {
+    "Info": [
+      {
+        "Name": "Jules Verne",
+        "Type": "author"
+      }
+    ],
+    "Results": [
+      {
+        "Name": "Jack London",
+        "Type": "author"
+      },
+      {
+        "Name": "Arthur Conan Doyle",
+        "Type": "author"
+      },
+      {
+        "Name": "Alexandre Dumas",
+        "Type": "author"
+      },
+      {
+        "Name": "Robert Louis Stevenson",
+        "Type": "author"
+      },
+      {
+        "Name": "H.G. Wells",
+        "Type": "author"
+      },
+      {
+        "Name": "Mark Twain",
+        "Type": "author"
+      },
+      {
+        "Name": "Daniel Defoe",
+        "Type": "author"
+      },
+      {
+        "Name": "Isaac Asimov",
+        "Type": "author"
+      },
+      {
+        "Name": "Oscar Wilde",
+        "Type": "author"
+      },
+      {
+        "Name": "Edgar Rice Burroughs",
+        "Type": "author"
+      },
+      {
+        "Name": "William Golding",
+        "Type": "author"
+      },
+      {
+        "Name": "John Steinbeck",
+        "Type": "author"
+      },
+      {
+        "Name": "Anatole France",
+        "Type": "author"
+      },
+      {
+        "Name": "Charles Dickens",
+        "Type": "author"
+      },
+      {
+        "Name": "Rudyard Kipling",
+        "Type": "author"
+      },
+      {
+        "Name": "Edgar Allan Poe",
+        "Type": "author"
+      },
+      {
+        "Name": "Franz Kafka",
+        "Type": "author"
+      },
+      {
+        "Name": "Joseph Conrad",
+        "Type": "author"
+      },
+      {
+        "Name": "Arthur C. Clarke",
+        "Type": "author"
+      },
+      {
+        "Name": "Jane Austen",
+        "Type": "author"
+      }
+    ]
+  }
+}
