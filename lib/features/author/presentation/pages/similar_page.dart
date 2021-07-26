@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean/features/author/presentation/bloc/bloc.dart';
+import 'package:flutter_clean/features/author/presentation/pages/cache_page.dart';
 import 'package:flutter_clean/features/author/presentation/widgets/loading_widget.dart';
 import 'package:flutter_clean/features/author/presentation/widgets/message_display.dart';
 import 'package:flutter_clean/features/author/presentation/widgets/similar_controls.dart';
@@ -12,7 +13,17 @@ class SimilarPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Number Trivia'),
+        title: Text('Similar Data'),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.bookmark),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CachePage()),
+                );
+              }),
+        ],
       ),
       body: SingleChildScrollView(
         child: buildBody(context),
@@ -28,13 +39,13 @@ class SimilarPage extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: <Widget>[
+              SimilarControls(),
               SizedBox(height: 10),
-              // Top half
               BlocBuilder<SimilarBloc, SimilarState>(
                 builder: (context, state) {
                   if (state is Empty) {
                     return MessageDisplay(
-                      message: '',
+                      message: 'Empty',
                     );
                   } else if (state is Loading) {
                     return LoadingWidget();
@@ -48,9 +59,6 @@ class SimilarPage extends StatelessWidget {
                   return MessageDisplay(message: 'Error');
                 },
               ),
-              SizedBox(height: 20),
-              // Bottom half
-              SimilarControls()
             ],
           ),
         ),

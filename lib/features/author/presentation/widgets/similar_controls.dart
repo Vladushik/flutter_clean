@@ -53,5 +53,6 @@ class _SimilarControlsState extends State<SimilarControls> {
   void dispatchConcrete() {
     controller.clear();
     BlocProvider.of<SimilarBloc>(context).add(GetSimilarData(inputStr!));
+    FocusScope.of(context).requestFocus(FocusNode());
   }
 }
