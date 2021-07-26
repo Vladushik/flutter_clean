@@ -17,9 +17,12 @@ class SimilarRemoteDataSourceImpl implements SimilarRemoteDataSource {
   SimilarRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<DatumModel> getSimilar(String name) async {
+  Future<DatumModel> getSimilar(String name) =>
+      _getSimilarFromUrl('https://tastedive.com/api/similar?q=$name');
+
+  Future<DatumModel> _getSimilarFromUrl(String url) async {
     final response = await client.get(
-      'https://tastedive.com/api/similar?q=${name.toLowerCase()}}',
+      url,
       headers: {
         'Content-Type': 'application/json',
       },
