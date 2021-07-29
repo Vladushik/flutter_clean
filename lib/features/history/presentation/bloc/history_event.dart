@@ -1,17 +1,19 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:meta/meta.dart';
 
+@immutable
 abstract class HistoryEvent extends Equatable {
+  HistoryEvent([List props = const <dynamic>[]]);
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [props];
 }
 
-// initial event
-class AuthorInitialEvent extends HistoryEvent {}
+class GetSimilarData extends HistoryEvent {
+  final String nameString;
 
-// add event
-class AuthorAddEvent extends HistoryEvent {
-  final String name, type;
+  GetSimilarData(this.nameString) : super([nameString]);
 
-  AuthorAddEvent({required this.name, required this.type});
+  @override
+  List<Object> get props => [nameString];
 }

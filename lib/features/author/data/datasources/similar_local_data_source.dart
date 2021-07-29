@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_clean/core/database/author.dart';
+import 'package:flutter_clean/core/database/author_database.dart';
 import 'package:flutter_clean/core/error/exceptions.dart';
 import 'package:flutter_clean/features/author/data/models/similar_model.dart';
+import 'package:flutter_clean/features/author/domain/entities/similar_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class SimilarLocalDataSource {
@@ -23,9 +26,14 @@ class SimilarLocalDataSourceImpl implements SimilarLocalDataSource {
   SimilarLocalDataSourceImpl({required this.sharedPreferences});
 
   @override
-  Future<void> cacheDatum(DatumModel datumToCache) {
-    return sharedPreferences.setString(
-        CASHED_SIMILAR, json.encode(datumToCache.toJson()));
+  Future<void> cacheDatum(Datum datum) async {
+    final db = await AuthorsDatabase.instance.database;
+    db.delete('authors');
+
+    for (var item in datum.similar.results) {
+      var author = Author(name: item.name, type: item.type);
+      await AuthorsDatabase.instance.create(author);
+    }
   }
 
   @override

@@ -1,25 +1,32 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_clean/features/author/domain/entities/similar_entity.dart';
+import 'package:meta/meta.dart';
 
-import 'package:flutter_clean/features/author/data/database/author.dart';
-
+@immutable
 abstract class HistoryState extends Equatable {
+  HistoryState([List props = const <dynamic>[]]);
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [props];
 }
 
-// initial
-class AuthorInitial extends HistoryState {}
+class Empty extends HistoryState {}
 
-// loading
-class AuthorsLoading extends HistoryState {}
+class Loading extends HistoryState {}
 
-//  your notes
-class YourAuthorsState extends HistoryState {
-  final List<Author> authors; // get all notes
+class Loaded extends HistoryState {
+  final Datum datum;
 
-  YourAuthorsState({required this.authors});
+  Loaded({required this.datum});
+  @override
+  List<Object> get props => [datum];
 }
 
-// new note
-class NewAuthorState extends HistoryState {}
+class Error extends HistoryState {
+  final String message;
+
+  Error({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
