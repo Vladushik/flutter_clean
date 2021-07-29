@@ -16,8 +16,8 @@ class AuthorsDatabase {
   }
 
   Future<Database> _initDB(String filePath) async {
-    final dbPath = await getDatabasesPath();
-    final path = join(dbPath, filePath);
+    final String dbPath = await getDatabasesPath();
+    final String path = join(dbPath, filePath);
     return await openDatabase(path, version: 1, onCreate: _createDB);
   }
 
@@ -30,62 +30,31 @@ create table $tableAuthors (
 ''');
   }
 
-  Future<Author> create(Author author) async {
-    final db = await instance.database;
-    final id = await db.insert(tableAuthors, author.toJson());
-    return author.copy(id: id);
-  }
-
-  Future<Author> readAuthors(int id) async {
-    final db = await instance.database;
-    final maps = await db.query(
-      tableAuthors,
-      columns: AuthorFields.values,
-      where: '${AuthorFields.id} = ?',
-      whereArgs: [id],
-    );
-    if (maps.isNotEmpty) {
-      return Author.fromJson(maps.first);
-    } else {
-      throw Exception('ID $id not found');
-    }
-  }
-
   Future<List<Author>> readAllAuthors() async {
-    final db = await instance.database;
-    final orderBy = '${AuthorFields.id} ASC';
-    final result = await db.query(tableAuthors, orderBy: orderBy);
+    final Database db = await instance.database;
+    final String orderBy = '${AuthorFields.id} ASC';
+    final List<Map<String, Object?>> result =
+        await db.query(tableAuthors, orderBy: orderBy);
     return result.map((json) => Author.fromJson(json)).toList();
   }
 
-  Future<int> update(Author author) async {
-    final db = await instance.database;
-    return db.update(
-      tableAuthors,
-      author.toJson(),
-      where: '${AuthorFields.id} = ?',
-      whereArgs: [author.id],
-    );
-  }
+  // Future<int> update(Author author) async {
+  //   final Database db = await instance.database;
+  //   return db.update(
+  //     tableAuthors,
+  //     author.toJson(),
+  //     where: '${AuthorFields.id} = ?',
+  //     whereArgs: [author.id],
+  //   );
+  // }
 
-  Future<void> deleteDB() async {
-    final db = await instance.database;
-    db.delete('authors');
-  }
+  // Future<void> deleteDB() async {
+  //   final Database db = await instance.database;
+  //   db.delete('authors');
+  // }
 
   // Future close() async {
   //   final db = await instance.database;
-  //
   //   db.close();
   // }
 }
-
-
-// Future addAuthors() async {
-//   for (var item in datum.similar.results) {
-//     var author = Author(name: item.name, type: item.type);
-//
-//     await AuthorsDatabase.instance.create(author);
-//   }
-// }
-

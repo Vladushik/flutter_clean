@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_clean/core/database/author.dart';
 import 'package:flutter_clean/core/database/author_database.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import 'author_card_widget.dart';
 
 class HistoryPage extends StatefulWidget {
   @override
@@ -13,16 +12,16 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage> {
   late List<Author> authors;
   bool isLoading = false;
-
   @override
   void initState() {
     super.initState();
+
     refreshAuthors();
   }
 
   @override
   void dispose() {
-    //  AuthorsDatabase.instance.close();
+    //  historyBloc.dispose();
     super.dispose();
   }
 
@@ -33,25 +32,32 @@ class _HistoryPageState extends State<HistoryPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text('History'),
-        ),
-        body: Center(
-          child: isLoading
-              ? CircularProgressIndicator()
-              : authors.isEmpty
-                  ? Text('No data')
-                  : buildAuthors(),
-        ),
-      );
-
-  Widget buildAuthors() => ListView.builder(
-        itemCount: authors.length,
-        itemBuilder: (context, index) {
-          final author = authors[index];
-
-          return AuthorCardWidget(author: author, index: index);
-        },
-      );
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('History')),
+      body: Center(
+        child: ListView.builder(
+            itemCount: authors.length,
+            itemBuilder: (BuildContext context, int index) {
+              final author = authors[index];
+              return Card(
+                color: Colors.grey[200],
+                child: Container(
+                  constraints: BoxConstraints(minHeight: 70),
+                  padding: EdgeInsets.all(8),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(author.name),
+                      SizedBox(height: 5),
+                      Text(author.type),
+                    ],
+                  ),
+                ),
+              );
+            }),
+      ),
+    );
+  }
 }

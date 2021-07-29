@@ -1,36 +1,16 @@
-//
-// import 'package:dartz/dartz.dart';
-// import 'package:flutter_clean/core/database/author.dart';
-// import 'package:flutter_clean/core/error/failures.dart';
-// import 'package:flutter_clean/features/history/data/datasources/history_local_data_source.dart';
-// import 'package:flutter_clean/features/history/domain/repositories/history_repository.dart';
-//
-// class HistoryRepositoryImpl implements HistoryRepository {
-//
-//   final HistoryLocalDataSource localDataSource;
-//
-//
-//   HistoryRepositoryImpl({
-//
-//     required this.localDataSource
-//
-//   });
-//
-//
-//   @override
-//   Future<Either<Failure, Author>> clearData() {
-//
-//   }
-//
-//   @override
-//   Future<Either<Failure, Author>> getData() async {
-//     final remoteSimilar = await remoteDataSource.getSimilar(name);
-//     localDataSource.cacheDatum(remoteSimilar);
-//     return Right(remoteSimilar);
-//   }
-//
-//   @override
-//   Future<Either<Failure, Author>> loadData() {
-//
-//   }
-// }
+import 'package:flutter_clean/core/database/author.dart';
+import 'package:flutter_clean/core/database/author_database.dart';
+import 'package:flutter_clean/features/history/domain/repositories/history_repository.dart';
+import 'package:sqflite/sqflite.dart';
+
+class HistoryRepositoryImpl implements HistoryRepository {
+  @override
+  Future<List<Author>> readAllAuthors() async {
+    print('show data');
+    final Database db = await AuthorsDatabase.instance.database;
+    final String orderBy = '${AuthorFields.id} ASC';
+    final List<Map<String, Object?>> result =
+        await db.query(tableAuthors, orderBy: orderBy);
+    return result.map((json) => Author.fromJson(json)).toList();
+  }
+}

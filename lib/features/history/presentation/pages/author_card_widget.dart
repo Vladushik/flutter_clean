@@ -10,13 +10,15 @@ class AuthorCardWidget extends StatelessWidget {
 
   final Author author;
   final int index;
+  // AuthorCardWidget(this.type, this.name);
+  //
+  // final String name;
+  // final String type;
 
   @override
   Widget build(BuildContext context) {
-
-
     return Card(
-      color:  Colors.grey[300],
+      color: Colors.grey[300],
       child: Container(
         constraints: BoxConstraints(minHeight: 70),
         padding: EdgeInsets.all(8),

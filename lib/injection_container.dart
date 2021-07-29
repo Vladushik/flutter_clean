@@ -1,4 +1,6 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
+import 'package:flutter_clean/core/datasources/similar_local_data_source.dart';
+import 'package:flutter_clean/core/datasources/similar_remote_data_source.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -6,9 +8,7 @@ import 'core/network/network_info.dart';
 import 'core/network/network_info.dart';
 import 'core/network/network_info.dart';
 import 'core/util/input_converter.dart';
-import 'features/author/data/datasources/similar_local_data_source.dart';
-import 'features/author/data/datasources/similar_remote_data_source.dart';
-import 'features/author/data/datasources/similar_remote_data_source.dart';
+
 import 'features/author/data/repositories/similar_repository_impl.dart';
 import 'features/author/domain/repositories/similar_repository.dart';
 import 'features/author/domain/usecases/get_similar.dart';
@@ -42,7 +42,8 @@ Future<void> init() async {
     () => SimilarRemoteDataSourceImpl(client: sl()),
   );
   sl.registerLazySingleton<SimilarLocalDataSource>(
-    () => SimilarLocalDataSourceImpl(sharedPreferences: sl()),
+    //  () => SimilarLocalDataSourceImpl(sharedPreferences: sl()),
+    () => SimilarLocalDataSourceImpl(),
   );
 
   // Core

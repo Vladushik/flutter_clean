@@ -21,7 +21,8 @@ class SimilarBloc extends Bloc<SimilarEvent, SimilarState> {
     required this.inputConverter,
   })   : assert(concrete != null),
         assert(inputConverter != null),
-        getSimilar = concrete;
+        getSimilar = concrete,
+        super(Empty());
 
   @override
   SimilarState get initialState => Empty();
