@@ -8,7 +8,6 @@ class HistoryLoadingState extends HistoryState {}
 
 class HistoryLoadedState extends HistoryState {
   List<Author> authors;
-
   HistoryLoadedState({required this.authors});
 }
 

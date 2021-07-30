@@ -29,32 +29,4 @@ create table $tableAuthors (
   ${AuthorFields.type} text not null)
 ''');
   }
-
-  Future<List<Author>> readAllAuthors() async {
-    final Database db = await instance.database;
-    final String orderBy = '${AuthorFields.id} ASC';
-    final List<Map<String, Object?>> result =
-        await db.query(tableAuthors, orderBy: orderBy);
-    return result.map((json) => Author.fromJson(json)).toList();
-  }
-
-  // Future<int> update(Author author) async {
-  //   final Database db = await instance.database;
-  //   return db.update(
-  //     tableAuthors,
-  //     author.toJson(),
-  //     where: '${AuthorFields.id} = ?',
-  //     whereArgs: [author.id],
-  //   );
-  // }
-
-  // Future<void> deleteDB() async {
-  //   final Database db = await instance.database;
-  //   db.delete('authors');
-  // }
-
-  // Future close() async {
-  //   final db = await instance.database;
-  //   db.close();
-  // }
 }

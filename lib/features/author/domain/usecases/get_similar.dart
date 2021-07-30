@@ -14,10 +14,6 @@ class GetSimilar implements UseCase<Datum, Params> {
   Future<Either<Failure, Datum>> call(Params params) async {
     return await repository.getSimilar(params.name);
   }
-
-
-
-
 }
 
 class Params extends Equatable {
