@@ -31,3 +31,11 @@ class SimilarRemoteDataSourceImpl implements SimilarRemoteDataSource {
     }
   }
 }
+
+// final Map<String, String> queryParameters = <String, String>{
+//   'q' : '$author',
+//   'type' : 'authors',
+//   'k' : ApiConstants.API_KEY
+// };
+//
+// final Uri uri = Uri.https(ApiConstants.URL_AUTHORITY, ApiConstants.URL_PATH, queryParameters);

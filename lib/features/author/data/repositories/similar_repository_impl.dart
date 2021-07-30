@@ -31,11 +31,7 @@ class SimilarRepositoryImpl implements SimilarRepository {
         return Left(ServerFailure());
       }
     } else {
-
       return Left(CacheFailure());
-
     }
   }
-
-  //add to db
 }

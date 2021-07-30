@@ -7,8 +7,11 @@ import 'package:flutter_clean/features/history/presentation/bloc/history_state.d
 
 class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
   final HistoryRepositoryImpl repositoryImpl;
+
   //HistoryBloc({required this.repositoryImpl}) : super(HistoryEmptyState());
-  HistoryBloc({required this.repositoryImpl});
+  HistoryBloc({required this.repositoryImpl}) : super(HistoryEmptyState()) {
+    add(HistoryReadAllAuthorsEvent());
+  }
 
   @override
   Stream<HistoryState> mapEventToState(HistoryEvent event) async* {
