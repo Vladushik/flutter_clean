@@ -22,15 +22,13 @@ class SimilarBloc extends Bloc<SimilarEvent, SimilarState> {
   })   : assert(concrete != null),
         assert(inputConverter != null),
         getSimilar = concrete,
-        super(Empty());
+        super();
 
   @override
   SimilarState get initialState => Empty();
 
   @override
-  Stream<SimilarState> mapEventToState(
-    SimilarEvent event,
-  ) async* {
+  Stream<SimilarState> mapEventToState(SimilarEvent event) async* {
     if (event is GetSimilarData) {
       final inputEither =
           inputConverter.stringToUnsignedInteger(event.nameString);
