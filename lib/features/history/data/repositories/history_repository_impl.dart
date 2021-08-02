@@ -1,16 +1,35 @@
 import 'package:flutter_clean/core/database/author.dart';
 import 'package:flutter_clean/core/database/author_database.dart';
+import 'package:flutter_clean/core/datasources/similar_local_data_source.dart';
 import 'package:flutter_clean/features/history/domain/repositories/history_repository.dart';
 import 'package:sqflite/sqflite.dart';
 
 class HistoryRepositoryImpl implements HistoryRepository {
+  final SimilarLocalDataSource localDataSource;
+
+  HistoryRepositoryImpl({required this.localDataSource});
+
   @override
-  Future<List<Author>> readAllAuthors() async {
-    print('show data');
-    final Database db = await AuthorsDatabase.instance.database;
-    final String orderBy = '${AuthorFields.id} ASC';
-    final List<Map<String, Object?>> result =
-        await db.query(tableAuthors, orderBy: orderBy);
-    return result.map((json) => Author.fromJson(json)).toList();
+  Future<List<Author>> readAllAuthors() {
+    return localDataSource.readAllAuthors();
   }
+
+/*
+  @override
+  Future<Either<Failure, Datum>> getSimilar(String name) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final DatumModel remoteSimilar =
+        await remoteDataSource.getSimilar(name);
+        localDataSource.saveToDatabase(remoteSimilar);
+        return Right(remoteSimilar);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(CacheFailure());
+    }
+  }
+  */
+
 }
